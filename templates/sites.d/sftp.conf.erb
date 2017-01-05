@@ -15,8 +15,19 @@ Port                <%= @port %>
 SFTPEngine          on
 SFTPLog             <%= @logdir %>/proftpd/sftp/sftp.log
 
+<% if @sshdsakey -%>
 SFTPHostKey         /etc/ssh/ssh_host_dsa_key
+<% end -%>
+<% if @sshrsakey -%>
 SFTPHostKey         /etc/ssh/ssh_host_rsa_key
+<% end -%>
+<% if @sshecdsakey -%>
+SFTPHostKey         /etc/ssh/ssh_host_ecdsa_key
+<% end -%>
+<% if @sshed25519key -%>
+SFTPHostKey         /etc/ssh/ssh_host_ed25519_key
+<% end -%>
+
 SFTPClientMatch     WinSCP|ClientSftp sftpProtocolVersion 1-3
 SFTPCompression     delayed
 
