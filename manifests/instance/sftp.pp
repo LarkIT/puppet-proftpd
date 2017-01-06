@@ -116,6 +116,7 @@ define proftpd::instance::sftp(
     command => "ssh-keygen -t rsa -f /etc/proftpd/ssh/${vhost_name}_ssh_host_rsa_key -q -C '' -N ''",
     creates => "/etc/proftpd/ssh/${vhost_name}_ssh_host_rsa_key",
     require => File['/etc/proftpd/ssh'],
+    before  => File["/etc/proftpd/sites.d/${vhost_name}.conf"],
   }
 
   exec { "${vhost_name}_host_ecdsa_key":
@@ -123,6 +124,7 @@ define proftpd::instance::sftp(
     command => "ssh-keygen -t ecdsa -f /etc/proftpd/ssh/${vhost_name}_ssh_host_ecdsa_key -q -C '' -N ''",
     creates => "/etc/proftpd/ssh/${vhost_name}_ssh_host_ecdsa_key",
     require => File['/etc/proftpd/ssh'],
+    before  => File["/etc/proftpd/sites.d/${vhost_name}.conf"],
   }
 
 }
