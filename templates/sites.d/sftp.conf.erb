@@ -13,7 +13,7 @@ PathDenyFilter      \.ftp[a-z]+$
 Port                <%= @port %>
 
 SFTPEngine          on
-SFTPLog             <%= @logdir %>/proftpd/sftp/sftp.log
+SFTPLog             <%= @logdir %>/proftpd/sftp/<%= @vhost_name %>_sftp.log
 
 SFTPHostKey         /etc/proftpd/ssh/<%= @vhost_name %>_ssh_host_rsa_key
 SFTPHostKey         /etc/proftpd/ssh/<%= @vhost_name %>_ssh_host_ecdsa_key
