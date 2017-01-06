@@ -43,6 +43,15 @@ define proftpd::instance::sftp(
 
   $vhost_name = "${ipaddress}_${port}"
 
+  if ! defined(File["/etc/proftpd/ssh"]) {
+    file { "/etc/proftpd/ssh":
+      ensure => directory,
+      owner  => $proftpd::proftpd_user,
+      group  => $proftpd::proftpd_group,
+      mode   => '0700',
+    }
+  }
+
   if ! defined(File["${logdir}/proftpd"]) {
     file { "${logdir}/proftpd":
       ensure => directory,
@@ -50,7 +59,6 @@ define proftpd::instance::sftp(
       group  => $proftpd::proftpd_group,
       mode   => '0750',
     }
-
   }
 
   if ! defined(File["${logdir}/proftpd/sftp"]) {
@@ -98,6 +106,25 @@ define proftpd::instance::sftp(
       mode    => '0640',
       replace => false
     }
+  }
+
+  # Create Host Keys
+  exec { "${vhost_name}_host_rsa_key":
+    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+    command => "ssh-keygen -t rsa -f /etc/proftpd/ssh/${vhost_name}_ssh_host_rsa_key -q -C '' -N ''",
+    creates => "/etc/proftpd/ssh/${vhost_name}_ssh_host_rsa_key",
+  }
+
+  exec { "${vhost_name}_host_ecdsa_key":
+    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+    command => "ssh-keygen -t rsa -f /etc/proftpd/ssh/${vhost_name}_ssh_host_ecdsa_key -q -C '' -N ''",
+    creates => "/etc/proftpd/ssh/${vhost_name}_ssh_host_ecdsa_key",
+  }
+
+  exec { "${vhost_name}_host_ed25519_key":
+    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+    command => "ssh-keygen -t rsa -f /etc/proftpd/ssh/${vhost_name}_ssh_host_ed25519_key -q -C '' -N ''",
+    creates => "/etc/proftpd/ssh/${vhost_name}_ssh_host_ed25519_key",
   }
 
 }
