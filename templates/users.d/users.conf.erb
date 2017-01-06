@@ -11,7 +11,7 @@ AuthGroupFile           /etc/proftpd/users.d/<%= @vhost_name %>.group
 <%- if @user_managed_ssh_keys -%>
 SFTPAuthorizedUserKeys file:~/.ssh/authorized_keys
 <%- else -%>
-SFTPAuthorizedUserKeys file:/etc/proftpd/users.d/<%= @vhost_name %>_authorized_keys/%u
+SFTPAuthorizedUserKeys file:/etc/proftpd/users.d/<%= @vhost_name %>.authorized_keys/%u
 <%- end -%>
 SFTPAuthorizedHostKeys file:/dev/null
 <%- end -%>
