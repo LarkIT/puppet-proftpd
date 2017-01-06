@@ -18,6 +18,9 @@ SFTPLog             <%= @logdir %>/proftpd/sftp/sftp.log
 SFTPHostKey         /etc/proftpd/ssh/<%= @vhost_name %>_ssh_host_rsa_key
 SFTPHostKey         /etc/proftpd/ssh/<%= @vhost_name %>_ssh_host_ecdsa_key
 
+#SFTPDisplayBanner  /etc/proftpd/ssh/<%= @vhost_name %>_banner
+SFTPAuthMethods     <%= @ssh_auth_methods %>
+
 SFTPClientMatch     WinSCP|ClientSftp sftpProtocolVersion 1-3
 SFTPCompression     delayed
 

@@ -15,6 +15,8 @@ define proftpd::instance::sftp(
   $timeoutidle=undef,
   $sftp_client_match=[],
   $authentication='file',
+  $ssh_auth_methods='publickey',
+  $user_managed_ssh_keys=false,
   $mysql_host=undef,
   $mysql_user=undef,
   $mysql_pass=undef,
