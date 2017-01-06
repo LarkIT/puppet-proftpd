@@ -123,11 +123,4 @@ define proftpd::instance::sftp(
     require => File['/etc/proftpd/ssh'],
   }
 
-  exec { "${vhost_name}_host_ed25519_key":
-    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
-    command => "ssh-keygen -t ed25519 -f /etc/proftpd/ssh/${vhost_name}_ssh_host_ed25519_key -q -C '' -N ''",
-    creates => "/etc/proftpd/ssh/${vhost_name}_ssh_host_ed25519_key",
-    require => File['/etc/proftpd/ssh'],
-  }
-
 }
