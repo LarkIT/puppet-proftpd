@@ -1,5 +1,5 @@
 class proftpd::config (
-  $manage_proftpd_conf = false
+  $manage_proftpd_conf = false,
   $proftpd_user        = $proftpd::proftpd_user,
   $proftpd_group       = $proftpd::proftpd_group,
 ) {
