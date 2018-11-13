@@ -7,7 +7,13 @@ AuthOrder mod_auth_file.c
 AuthUserFile            /etc/proftpd/users.d/<%= @vhost_name %>.passwd
 AuthGroupFile           /etc/proftpd/users.d/<%= @vhost_name %>.group
 <%- if @protocol == 'sftp' -%>
+#SFTPAuthorizedUserKeys file:~/.ssh/authorized_keys
+<%- if @user_managed_ssh_keys -%>
 SFTPAuthorizedUserKeys file:~/.ssh/authorized_keys
+<%- else -%>
+SFTPAuthorizedUserKeys file:/etc/proftpd/users.d/<%= @vhost_name %>.authorized_keys/%u
+<%- end -%>
+SFTPAuthorizedHostKeys file:/dev/null
 <%- end -%>
 <%- end -%>
 
